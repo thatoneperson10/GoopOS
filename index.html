@@ -2,53 +2,107 @@
 <html>
     <head>
         <style>
-        body {
-            background-color: #504e6d;
-            color: #9c98d3;
-            font-family: comic sans ms, cursive, sans-serif;
-            text-align: center;
-            font-size: 110%;
-            margin: 0;
-            padding-top: 40px;
-        }
+            body {
+                background-color: #888888;
+                color: #000000;
+                font-family: comic sans ms, cursive, sans-serif;
+                text-align: center;
+                font-size: 110%;
+                margin: 0;
+                padding-top: 40px;
+            }
 
-        img {
-            display: block;
-            margin: 40px auto 20px auto;
-        }
-        a {
-            color: #9c98d3;
-            font-weight: bold;
-            text-decoration: underline;
-        }
-    </style>
+            img {
+                display: block;
+                margin: 40px auto 20px auto;
+            }
+            a {
+                text-decoration: none;
+            }
+            .content {
+                padding: 20px;
+            }
+        </style>
     </head>
 
     <body
-        style="background-image: url(./mandel.png); height: 100vh; background-size: cover; background-position: center; backdrop-filter: blur(5px); overflow: hidden;">
+        style="background-image: url(./mandel.png); height: 100vh; background-size: cover; background-position: right center; background-repeat: no-repeat; backdrop-filter: blur(3px); overflow: hidden; display: flex; flex-direction: column; justify-content: center; align-items: center;">
 
-        <div style="
-            position: fixed; top: 0; left: 0; width: 100%; height: 30px; background-color: rgba(0, 0, 0, 0.25); display: flex;
-            align-items: center; padding-left: 10px; color: #9c98d3; font-size: 14px; z-index: 999;
+        <div style=" 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 42px; 
+            background-color: rgba(255, 255, 255, 0.75); 
+            display: flex; 
+            align-items: center; 
+            padding-left: 10px; 
+            color: #000000; 
+            font-size: 20px; 
+            z-index: 999; 
         ">
-            <p style="text-align: left; margin-left: 10px; padding-right: auto;">goopOS</p>
-            <p style="text-align: right; margin-left: auto; padding-right: 30px;">6/10/2026 10:10 PM</p>
+            <p style="text-align: left; margin-left: 10px; cursor: pointer;" id="welcomeopen">
+                goopOS
+            </p>
+            <p
+                id="timeElement"
+                style="text-align: right; margin-left: auto; padding-right: 30px;">
+                Time
+            </p>
         </div>
 
         <div
-            style="border: solid; width: fit-content; border-radius: 20px; padding: 32px; position: absolute; top: 50%; left: 50%; 
-transform: translate(-50%, -50%); background-color: rgba(255, 255, 255, 0.5);">
-            <img src="./goopOS-logo-bordered.png" width="640">
-            <h1>Welcome to my <s>house</s> OS</h1>
-            <h2>This is <span
-                    style="font-weight: bold; font-size: 155%; ">goopOS</span></h2>
-            <p style="font-size: 75%;">A little bit of goooop</p>
-            <p style="text-align: left;">Thanks to <a
-                    href="https://stardance.hackclub.com/missions/web-os-1"
-                    style="font-weight: bold; font-size: 125%; color: #9c98d3;">Stardance</a>
-                for the tutorial that led me to making this OS</p>
+            id="welcome"
+            style=" 
+                border: solid; 
+                width: 520px; 
+                border-radius: 32px; 
+                padding: 0px; 
+                position: absolute; 
+                background-color: rgba(255, 255, 255, 0.5);
+                visibility: visible;
+            ">
+            <div id="welcomeheader" style="
+                padding: 15px;
+                background-color: rgba(0, 0, 0, 0.5);
+                border-radius: 32px 32px 0px 0px;
+                cursor: grab;
+                text-align: left;
+                color: #ffffff;
+                display: flex;
+                align-items: center;
+            ">
+                <span style="cursor: pointer; display: inline-block; line-height: 0;" id="welcomeclose">
+                    <img src="./Red_X.svg" width="20" height="20" style="margin: 0;">
+                </span>
+            </div>
+            <div class="content">
+                <img src="./goopOS-logo-bordered.png" width="480">
+
+                <h1>Welcome to my <s>house</s> OS</h1>
+
+                <h2>
+                    This is
+                    <span style="font-weight: bold; font-size: 155%;">
+                        goopOS
+                    </span>
+                </h2>
+
+                <p style="font-size: 75%;">
+                    A little bit of goooop
+                </p>
+
+                <p style="text-align: left;">
+                    Thanks to
+                    <a href="https://stardance.hackclub.com/missions/web-os-1" target="_blank"
+                        style="font-weight: bold; font-size: 125%; color: #000000;">
+                        Stardance
+                    </a>
+                    for the tutorial that led me to making this OS!
+                </p>
+            </div>
         </div>
-
+        <script src="script.js"></script>
     </body>
-
 </html>
