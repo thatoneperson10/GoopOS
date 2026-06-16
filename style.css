@@ -1,0 +1,39 @@
+.closebutton {
+    cursor: pointer;
+    display: inline-block;
+    line-height: 0;
+}
+
+.header {
+    padding: 15px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 28px 28px 0px 0px;
+    cursor: grab;
+    text-align: left;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.window {
+    border: solid;
+    width: 520px;
+    border-radius: 32px;
+    padding: 0px;
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    visibility: visible;
+}
+
+.content {
+    padding: 20px;
+}
+
+.openbutton {
+    text-align: left;
+    margin-left: 10px;
+    cursor: pointer;
+}
