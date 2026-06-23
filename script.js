@@ -15,6 +15,9 @@ document.addEventListener("DOMContentLoaded", function () {
     var notepadApp = document.querySelector("#notepadApp");
     var notepadAppClose = document.querySelector("#notepadAppclose");
     var notepadAppOpen = document.querySelector("#notepadAppopen");
+    var googleApp = document.querySelector("#google");
+    var googleAppClose = document.querySelector("#googleclose");
+    var googleAppOpen = document.querySelector("#googleopen");
 
     if (welcomeScreen) {
         dragElement(welcomeScreen);
@@ -36,15 +39,31 @@ document.addEventListener("DOMContentLoaded", function () {
         dragElement(notepadApp);
     }
 
-    if (notepadAppclose && notepadApp) {
-        notepadAppclose.addEventListener("click", function () {
+    if (notepadAppClose && notepadApp) {
+        notepadAppClose.addEventListener("click", function () {
             closeWindow(notepadApp);
         });
     }
 
-    if (notepadAppopen && notepadApp) {
-        notepadAppopen.addEventListener("click", function () {
+    if (notepadAppOpen && notepadApp) {
+        notepadAppOpen.addEventListener("click", function () {
             openWindow(notepadApp);
+        });
+    }
+
+    if (googleApp) {
+        dragElement(googleApp);
+    }
+
+    if (googleAppClose && googleApp) {
+        googleAppClose.addEventListener("click", function () {
+            closeWindow(googleApp);
+        });
+    }
+
+    if (googleAppOpen && googleApp) {
+        googleAppOpen.addEventListener("click", function () {
+            openWindow(googleApp);
         });
     }
 });
@@ -60,55 +79,82 @@ function openWindow(element) {
 // Make the DIV element draggable:
 dragElement(document.getElementById("welcome"));
 dragElement(document.getElementById("notepadApp"));
+dragElement(document.getElementById("google"));
 // Step 1: Define a function called `dragElement` that makes an HTML element draggable.
 function dragElement(element) {
-  // Step 2: Set up variables to keep track of the element's position.
+  // Set up variables to keep track of the element's position.
   var initialX = 0;
   var initialY = 0;
   var currentX = 0;
   var currentY = 0;
-
-  // Step 3: Check if there is a special header element associated with the draggable element.
-  if (document.getElementById(element.id + "header")) {
-    // Step 4: If present, assign the `dragMouseDown` function to the header's `onmousedown` event.
-    // This allows you to drag the window around by its header.
-    document.getElementById(element.id + "header").onmousedown = startDragging;
+    
+  // Check if there is a special header element associated with the draggable element.
+  var header = document.getElementById(element.id + "header");
+  if (header) {
+    // Assign the `startDragging` function to the header's `onmousedown` event.
+    header.onmousedown = startDragging;
   } else {
-    // Step 5: If not present, assign the function directly to the draggable element's `onmousedown` event.
-    // This allows you to drag the window by holding down anywhere on the window.
+    // Assign the function directly to the draggable element's `onmousedown` event.
     element.onmousedown = startDragging;
   }
 
-  // Step 6: Define the `startDragging` function to capture the initial mouse position and set up event listeners.
+  // Define the `startDragging` function to capture the initial mouse position and set up event listeners.
   function startDragging(e) {
     e = e || window.event;
     e.preventDefault();
-    // Step 7: Get the mouse cursor position at startup.
+    
+    // --- INTEGRATED: Bring the clicked window to the top ---
+    layerOnTop(element);
+    
+    // Get the mouse cursor position at startup.
     initialX = e.clientX;
     initialY = e.clientY;
-    // Step 8: Set up event listeners for mouse movement (`elementDrag`) and mouse button release (`closeDragElement`).
+    
+    // Set up event listeners for mouse movement and mouse button release.
     document.onmouseup = stopDragging;
-    document.onmousemove = dragElement;
+    document.onmousemove = moveElement; // Renamed to avoid conflicting with outer function name
   }
-
-  // Step 9: Define the `elementDrag` function to calculate the new position of the element based on mouse movement.
-  function dragElement(e) {
+  
+  // Define the `moveElement` function to calculate the new position of the element based on mouse movement.
+  function moveElement(e) {
     e = e || window.event;
     e.preventDefault();
-    // Step 10: Calculate the new cursor position.
+    
+    // Calculate the new cursor position.
     currentX = initialX - e.clientX;
     currentY = initialY - e.clientY;
     initialX = e.clientX;
     initialY = e.clientY;
-    // Step 11: Update the element's new position by modifying its `top` and `left` CSS properties.
+    
+    // Update the element's new position by modifying its `top` and `left` CSS properties.
     element.style.top = (element.offsetTop - currentY) + "px";
     element.style.left = (element.offsetLeft - currentX) + "px";
   }
 
-  // Step 12: Define the `stopDragging` function to stop tracking mouse movement by removing the event listeners.
+  // Define the `stopDragging` function to stop tracking mouse movement by removing the event listeners.
   function stopDragging() {
     document.onmouseup = null;
     document.onmousemove = null;
+  }
+
+  // The helper function to calculate and apply the highest z-index
+  function layerOnTop(el) {
+    const windows = document.querySelectorAll('.window');
+    
+    // Map all z-indices to numbers, defaulting to 0 if auto/invalid
+    const zIndices = Array.from(windows, w => 
+      parseInt(window.getComputedStyle(w).zIndex, 10) || 0
+    );
+
+    // Find the highest z-index (default to 0 if no windows exist)
+    const maxZIndex = zIndices.length > 0 ? Math.max(...zIndices) : 0;
+
+    // Optional optimization: If the element is already on top, do nothing
+    const currentZ = parseInt(window.getComputedStyle(el).zIndex, 10) || 0;
+    if (currentZ === maxZIndex && maxZIndex > 0) return;
+
+    // Set the new z-index one higher than the max
+    el.style.zIndex = maxZIndex + 1;
   }
 }
 
