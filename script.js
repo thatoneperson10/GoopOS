@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (welcomeScreenOpen && welcomeScreen) {
         welcomeScreenOpen.addEventListener("click", function () {
-            openWindow(welcomeScreen);
+            toggleWindow(welcomeScreen);
         });
     }
 
@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (notepadAppOpen && notepadApp) {
         notepadAppOpen.addEventListener("click", function () {
-            openWindow(notepadApp);
+            toggleWindow(notepadApp);
         });
     }
 
@@ -63,17 +63,30 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (googleAppOpen && googleApp) {
         googleAppOpen.addEventListener("click", function () {
-            openWindow(googleApp);
+            toggleWindow(googleApp);
         });
     }
 });
 
 function closeWindow(element) {
-    element.style.visibility = "hidden";
+    element.classList.add("closed");
+
+    setTimeout(() => {
+        element.style.visibility = "hidden";
+    }, 300);
 }
 
 function openWindow(element) {
     element.style.visibility = "visible";
+    element.classList.remove("closed");
+}
+
+function toggleWindow(element) {
+    if (element.classList.contains("closed") || element.style.visibility === "hidden") {
+        openWindow(element);
+    } else {
+        closeWindow(element);
+    }
 }
 
 // Make the DIV element draggable:

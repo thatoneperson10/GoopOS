@@ -41,19 +41,19 @@
             font-size: 20px; 
             z-index: 999; 
         ">
-            <p class="openbutton"
+            <p class="openbutton hover"
                 id="welcomeopen">
                 goopOS
             </p>
             <img
-                class="openbutton"
+                class="openbutton hover"
                 id="notepadAppopen"
-                style="margin-right: 10px; margin-bottom: 36px;"
+                style="margin-right: 10px; margin-left: 10px; margin-bottom: 36px;"
                 src="./notebook-pen-icon.png" width="32" height="32">
             <img
-                class="openbutton"
+                class="openbutton hover"
                 id="googleopen"
-                style="margin-right: 10px; margin-bottom: 36px;"
+                style="margin-right: 10px; margin-left: 10px; margin-bottom: 36px;"
                 src="./google-logo.png" width="32" height="32">
             <p
                 id="timeElement"
@@ -61,14 +61,14 @@
                 Time
             </p>
         </div>
-        <div id="notepadApp" class="window"
-            style="top: 140px; left: 140px; visibility: hidden;">
+        <div id="notepadApp" class="window closed"
+            style="top: 140px; left: 140px;">
             <div id="notepadAppheader" class="header">
                 <span
                     style="flex-grow: 1; font-weight: bold; color: #ffffff; text-align: left;">Notepad</span>
                 <span class="closebutton" id="notepadAppclose">
                     <img src="./Red_X.svg" width="20" height="20"
-                        style="margin: 0;">
+                        style="margin: 0;" class="hover">
                 </span>
             </div>
             <div class="content"
@@ -86,14 +86,14 @@
         </div>
 
         <div id="welcome" class="window"
-            style="top: auto; left: auto; visibility: visible;">
+            style="top: auto; left: auto;">
             <div id="welcomeheader" class="header">
                 <span
                     style="flex-grow: 1; font-weight: bold; color: #ffffff; text-align: left;">Welcome</span>
                 <span
                     class="closebutton" id="welcomeclose">
                     <img src="./Red_X.svg" width="20" height="20"
-                        style="margin: 0;">
+                        style="margin: 0;" class="hover">
                 </span>
             </div>
             <div class="content">
@@ -128,20 +128,20 @@
                 </p>
             </div>
         </div>
-        <div id="google" class="window"
-            style="bottom: 100px; right: 100px; visibility: hidden;">
+        <div id="google" class="window closed"
+            style="top: calc(100% - 700px); left: calc(100% - 625px);">
             <div id="googleheader" class="header">
                 <span
                     style="flex-grow: 1; font-weight: bold; color: #ffffff; text-align: left;">Google</span>
                 <span
                     class="closebutton" id="googleclose">
                     <img src="./Red_X.svg" width="20" height="20"
-                        style="margin: 0;">
+                        style="margin: 0;" class="hover">
                 </span>
             </div>
             <div class="content">
                 <iframe src="https://www.google.com/webhp?igu=1" width="100%"
-                    height="500" title="Google"></iframe>
+                    height="500px" title="Google"></iframe>
             </div>
         </div>
         <script src="script.js"></script>

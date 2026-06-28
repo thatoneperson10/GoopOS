@@ -26,6 +26,13 @@
     backdrop-filter: blur(3px);
     -webkit-backdrop-filter: blur(3px);
     visibility: visible;
+    transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.window.closed {
+  transform: scale(0.9);
+  opacity: 0;
+  pointer-events: none;
 }
 
 .content {
@@ -36,4 +43,21 @@
     text-align: left;
     margin-left: 10px;
     cursor: pointer;
+}
+
+.hover {
+    transition: transform 0.2s;
+}
+
+.hover:hover {
+    transform: scale(1.1);
+}
+
+.hover:active {
+    transform: scale(0.95);
+}
+
+.topbar img {
+  margin: 0 10px;
+  cursor: pointer;
 }
